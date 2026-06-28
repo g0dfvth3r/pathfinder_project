@@ -1,4 +1,5 @@
 from grid.grid import Grid
+from ui.draw import draw_grid
 import pygame
 import config
 
@@ -12,6 +13,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        screen.fill((0, 0, 0))
+        draw_grid(screen)
 
         pygame.display.flip()
 
