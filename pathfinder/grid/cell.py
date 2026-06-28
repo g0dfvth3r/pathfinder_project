@@ -1,4 +1,4 @@
-for enum import Enum
+from enum import Enum
 
 class CellState(Enum):
     EMPTY = 0
