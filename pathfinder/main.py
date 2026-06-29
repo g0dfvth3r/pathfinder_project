@@ -1,4 +1,5 @@
 from grid.grid import Grid
+from grid.cell import CellState
 from ui.draw import draw_grid
 import pygame
 import config
@@ -13,7 +14,8 @@ def main():
     start = grid.cells[0][0]  # Starting cell
     end = grid.cells[19][19]  # Ending cell
     path = bfs(grid, start, end)  # Run BFS algorithm
-    print(path)  # Print the path found by BFS
+    for cell in path:
+        cell.state = CellState.PATH  # Mark the path cells
 
     while running:
         for event in pygame.event.get():
@@ -21,7 +23,7 @@ def main():
                 running = False
 
         screen.fill((0, 0, 0))
-        draw_grid(screen)
+        draw_grid(screen, grid)
 
         pygame.display.flip()
 
