@@ -10,5 +10,9 @@ class CellState(Enum):
 class Cell:
 
     def __init__(self, row, col, state=CellState.EMPTY):
-        self.position = (row, col)
+        self.row = row
+        self.col = col
         self.state = state
+
+    def __repr__(self):
+        return f"Cell({self.row}, {self.col})"
