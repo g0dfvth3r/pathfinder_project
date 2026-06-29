@@ -4,4 +4,4 @@ class Grid:
     def __init__(self,rows, cols):
         self.rows = rows
         self.cols = cols
-        self.grid = [[Cell(row, col) for col in range(cols)] for row in range(rows)]
+        self.cells = [[Cell(row, col) for col in range(cols)] for row in range(rows)]
