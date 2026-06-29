@@ -11,20 +11,34 @@ def main():
     grid = Grid(config.ROWS, config.COLS)
     running = True
 
-    start = grid.cells[0][0]  # Starting cell
-    end = grid.cells[19][19]  # Ending cell
-    path = bfs(grid, start, end)  # Run BFS algorithm
-    for cell in path:
-        cell.state = CellState.PATH  # Mark the path cells
+    start = None
+    end = None
+    path = []
 
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = pygame.mouse.get_pos()
+                row = y // config.CELL_SIZE
+                col = x // config.CELL_SIZE
+                cell = grid.cells[row][col]
+
+                if start is None:
+                    start = cell
+                    start.state = CellState.START
+                elif end is None:
+                    end = cell
+                    end.state = CellState.END
+                    path = bfs(grid, start, end)  # Call BFS to find the path
+                    for c in path:
+                        if c != start and c != end:
+                            c.state = CellState.PATH  # Mark the path cells
+
         screen.fill((0, 0, 0))
         draw_grid(screen, grid)
-
         pygame.display.flip()
 
     pygame.quit()
