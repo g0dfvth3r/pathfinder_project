@@ -8,15 +8,10 @@ def bfs(grid, start, end):
 
     while queue:
         current = queue.popleft()
+        yield current, visited, came_from  # Yield the current state for visualization
 
         if current == end:
-            path = []
-            while current != start:
-                path.append(current)
-                current = came_from[current]
-            path.append(start)
-            path.reverse()
-            return path
+            return
 
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Up, Down, Left, Right
         for dr, dc in directions:
@@ -29,5 +24,5 @@ def bfs(grid, start, end):
                     visited.add(neighbor)
                     queue.append(neighbor)
     
-    return False
+    # no path found — queue exhausted, function just ends here naturally
     

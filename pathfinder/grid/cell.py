@@ -6,6 +6,7 @@ class CellState(Enum):
     START = 2
     END = 3
     PATH = 4
+    VISITED = 5
 
 class Cell:
 

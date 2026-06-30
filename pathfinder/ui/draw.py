@@ -14,6 +14,8 @@ def draw_grid(screen, grid):
                 color = (0, 0, 255)  # Blue for path cells
             elif cell.state == CellState.WALL:
                 color = (255, 255, 255)  # White for wall cells
+            elif cell.state == CellState.VISITED:
+                color = (255, 255, 0)  # Yellow for visited cells
             pygame.draw.rect(screen, color, (cell.col * config.CELL_SIZE, cell.row * config.CELL_SIZE, config.CELL_SIZE, config.CELL_SIZE))
 
     for row in range(config.ROWS + 1):
