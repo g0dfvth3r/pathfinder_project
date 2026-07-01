@@ -1,5 +1,7 @@
 from collections import deque
 
+from grid.cell import CellState
+
 def bfs(grid, start, end):
 
     queue = deque([start])
@@ -19,7 +21,7 @@ def bfs(grid, start, end):
             new_col = current.col + dc
             if 0 <= new_row < grid.rows and 0 <= new_col < grid.cols:
                 neighbor = grid.cells[new_row][new_col]
-                if neighbor not in visited:
+                if neighbor not in visited and neighbor.state != CellState.WALL:
                     came_from[neighbor] = current
                     visited.add(neighbor)
                     queue.append(neighbor)

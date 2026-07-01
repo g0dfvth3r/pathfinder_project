@@ -6,7 +6,7 @@ from algorithms.path_utils import reconstruct_path
 import pygame
 import config
 
-STEP_DELAY = 1000  # ms between BFS steps — tune to taste
+STEP_DELAY = 50  # ms between BFS steps — tune to taste
 
 def main():
     pygame.init()
@@ -15,7 +15,7 @@ def main():
     running = True
     start = None
     end = None
-
+    is_drawing_wall = False
     bfs_gen = None
     last_step_time = 0
     last_current = None  # tracks the most recent cell BFS visited
@@ -36,6 +36,19 @@ def main():
                     end = cell
                     end.state = CellState.END
                     bfs_gen = bfs(grid, start, end)  # create generator, don't run it yet
+                else:
+                    is_drawing_wall = True
+                    if cell.state == CellState.EMPTY:
+                        cell.state = CellState.WALL
+            if event.type == pygame.MOUSEBUTTONUP:
+                is_drawing_wall = False
+            if event.type == pygame.MOUSEMOTION and is_drawing_wall:
+                x, y = pygame.mouse.get_pos()
+                row = y // config.CELL_SIZE
+                col = x // config.CELL_SIZE
+                cell = grid.cells[row][col]
+                if cell.state == CellState.EMPTY:
+                    cell.state = CellState.WALL
 
         if bfs_gen is not None:
             now = pygame.time.get_ticks()
