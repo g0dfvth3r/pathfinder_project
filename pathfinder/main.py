@@ -5,6 +5,8 @@ from algorithms.bfs import bfs
 from algorithms.path_utils import reconstruct_path
 import pygame
 import config
+from colorama import Fore, Style, init
+init()
 
 STEP_DELAY = 50  # ms between BFS steps — tune to taste
 
@@ -68,7 +70,8 @@ def main():
                         for c in path:
                             if c != start and c != end:
                                 c.state = CellState.PATH
-                    # else: queue exhausted, no path found — nothing to do, grid already shows VISITED cells
+                    else: #queue exhausted, no path found — nothing to do, grid already shows VISITED cells
+                        print(Fore.RED + "NO PATH FOUND !" + Style.RESET_ALL)
 
         screen.fill((0, 0, 0))
         draw_grid(screen, grid)
