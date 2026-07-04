@@ -8,7 +8,7 @@ import config
 from colorama import Fore, Style, init
 init()
 
-STEP_DELAY = 50  # ms between BFS steps — tune to taste
+STEP_DELAY = 10  # ms between BFS steps — tune to taste
 
 def main():
     pygame.init()
